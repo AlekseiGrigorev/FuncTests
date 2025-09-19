@@ -1,1 +1,1 @@
-# Функциональное тестирование проекта на основе использования библиотеки requests
+# Functional testing of a web project or API using pytest and the requests library
