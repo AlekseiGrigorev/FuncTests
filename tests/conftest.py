@@ -1,21 +1,23 @@
-import sys
-import os
 import pytest
-import requests
-from dotenv import load_dotenv
-import configparser
 
+from src.env import Env
+from src.config import Config
 from src.login import Login
 
-load_dotenv()
-# load_dotenv(dotenv_path="../.env")
-base_url = os.getenv('BASE_URL')
-print(base_url)
+env = Env()
+config = Config('config.ini')
 
-config = configparser.ConfigParser()
-config.read('config.ini')  # Чтение файла
+@pytest.fixture(scope="session")
+def env_session()-> Env: 
+    return env
+
+@pytest.fixture(scope="session")
+def config_session()-> Config: 
+    return config
 
 @pytest.fixture(scope="session")
 def auth_session():
-    session = Login(base_url+config.get('pages', 'login'), os.getenv('USERNAME'), os.getenv('PASSWORD')).login()
+    url: str = env.get('BASE_URL')+config.get('pages', 'login')
+    print(url)
+    session = Login(url, env.get('USERNAME'), env.get('PASSWORD')).login()
     return session
