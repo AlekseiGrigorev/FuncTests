@@ -1,4 +1,3 @@
-import time
 from typing import cast
 import requests
 from bs4 import BeautifulSoup, element
@@ -46,12 +45,11 @@ class Login:
         requests.Session
             A requests Session instance with the authentication cookies set.
         """
-        
+
         session = requests.Session()
 
         # Get the form with the token
         response = session.get(self.login_url)
-        time.sleep(1)
         
         # Find the token in <input> with name csrf_token (example)
         soup = BeautifulSoup(response.text, 'html.parser')

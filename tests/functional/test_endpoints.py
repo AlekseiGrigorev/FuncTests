@@ -33,7 +33,7 @@ def test_init(env_session: Env, config_session: Config, auth_session: requests.S
 
     headers = auth_session.headers
     headers["X-Requested-With"]="XMLHttpRequest"
-    url: str = env_session.get('BASE_URL')+config_session.get('endpoints', 'init')
+    url: str = env_session.get('FUNCTESTS_BASE_URL')+config_session.get('endpoints', 'init')
     print("Endpoint: "+url)
     response: requests.Response = auth_session.get(url, headers=headers)
     print("Endpoint status: " + str(response.status_code))

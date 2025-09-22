@@ -12,13 +12,13 @@ def test_login(env_session: Env, config_session: Config):
     function_name = current_frame.f_code.co_name
     print(f'{function_name} test called')
     
-    url: str = env_session.get('BASE_URL')+config_session.get('pages', 'login')
-    session = Login(url, env_session.get('USERNAME'), env_session.get('PASSWORD')).login()
+    url: str = env_session.get('FUNCTESTS_BASE_URL')+config_session.get('pages', 'login')
+    session = Login(url, env_session.get('FUNCTESTS_USERNAME'), env_session.get('FUNCTESTS_PASSWORD')).login()
     
-    response = session.get(env_session.get('BASE_URL'))
-    print(response.status_code)
-    print(response.url)
-    print(response.text)
+    response = session.get(env_session.get('FUNCTESTS_BASE_URL'))
+    #print(response.status_code)
+    #print(response.url)
+    #print(response.text)
 
     assert response.status_code == 200
-    assert response.url == env_session.get('BASE_URL')
+    assert response.url == env_session.get('FUNCTESTS_BASE_URL')
